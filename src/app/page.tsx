@@ -7,6 +7,9 @@ const mockImages = mockUrls.map((url, index) => ({
 export default function HomePage() {
 	return (
 		<main>
+      <div className="flex flex-wrap">
+      <Link href="/layer02">Page 2</Link>
+    </div>
 			<div className="flex flex-wrap gap-4 saturate-8000 hue-rotate-800 cursor-help -skew-5 rotate-67 blur-sm shadow-xl/30">{
       mockImages.map((image) => (
         <div key ={image.id} className="w-900">
@@ -14,9 +17,6 @@ export default function HomePage() {
         </div>
       ))
     }
-    </div>
-    <div className="flex flex-wrap">
-      <button className="cursor-pointer ring-4 ">Sybau</button>
     </div>
 
 		</main>
