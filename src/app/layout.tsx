@@ -1,6 +1,6 @@
 
 import "~/styles/globals.css";
-
+import Link from "next/link";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
@@ -21,7 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geist.variable}`}>
-        <div className="w-full bg-cyan-200 text-center"> First Layout</div>
+            <div className="items-start flex flex-row gap-x-2 w-full h-10 bg-black join">
+              <Link href="/"><button className="join-item btn bg-[#000000] text-white border-[#e5e5e5]">Home</button></Link>
+              <Link href="/layer02"><button className="join-item  btn bg-[#000000] text-white border-[#e5e5e5]">About</button></Link>
+              <Link href="/layer03"><button className="join-item  btn bg-[#000000] text-white border-[#e5e5e5]">Database</button></Link>
+              <Link href="/layer04"><button className="join-item btn bg-[#000000] text-white border-[#e5e5e5]">Secret Page 4</button></Link>
+            </div>
         {children}
       </body>
     </html>

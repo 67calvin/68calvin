@@ -1,25 +1,53 @@
-import Link from "next/link";
-const mockUrls = ["https://8fkcpvra9j.ufs.sh/f/uFS3O6klxSLbWVxKHu8dNsLBaAgPFQJmeX5SzfOc02ZTVqiD","https://8fkcpvra9j.ufs.sh/f/uFS3O6klxSLbxMNtQTpVLQG3WprkuJhVECyTHFDNqAmz4nXj","https://8fkcpvra9j.ufs.sh/f/uFS3O6klxSLbcG7IGthmKEz2TLP1DlgZhqsVQaxutU9c76N3","https://8fkcpvra9j.ufs.sh/f/uFS3O6klxSLbGocuCaS0Ef7PVqKbYjWgvJScraHmk8wMZnzA"]
-const mockImages = mockUrls.map((url, index) => ({
-  id: index + 1,
-  url,
-}));
-export default function HomePage() {
-	return (
-		<main>
-      <div className="flex flex-wrap">
-      <Link href="/layer02">Page 2</Link>
-    </div>
-			<div className="flex flex-wrap gap-4 saturate-8000 hue-rotate-800 cursor-help -skew-5 rotate-67 blur-sm shadow-xl/30">{
-      mockImages.map((image) => (
-        <div key ={image.id} className="w-900">
-          <img src={image.url} alt="image" />
-        </div>
-      ))
-    }
-    </div>
+"use client";
+import { useState, useEffect } from "react";
+import uploadData from "./api/upload-stuff/upload";
+import { useRouter } from "next/navigation";
 
-		</main>
-	);
+
+export default function UploadForm() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const router = useRouter();
+
+
+  useEffect(() => {
+    // This hook will run after the component is mounted on the client side
+    // Any code that interacts with the browser (e.g., navigation, DOM manipulation) should go here
+  }, []); // Empty dependency array ensures it runs only once, after initial render
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = await uploadData(title, content);
+    console.log(result); // Handle the result as needed
+    router.push("/"); // Redirect to the home page after submission, not needed but good to have as example
+  };
+
+
+  return (
+  <main>
+    
+    <form onSubmit={handleSubmit} className="flex flex-wrap justify-center ">
+      <div className = "flex-col flex w-100">
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+        required
+      />
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Content"
+        required
+      />
+      <button className = "btn btn-primary" type="submit">Upload</button>
+      <div className="flex flex-col justify-center"><img src="https://tse1.mm.bing.net/th/id/OIP.wHS0bCRzPps-1VH3uEbrpgHaFM?cb=ucfimg2&pid=ImgDet&ucfimg=1&w=206&h=143&c=7&o=7&rm=3"></img></div>
+      </div>
+    </form>
+</main>
+
+  );
 }
 
